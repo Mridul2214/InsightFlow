@@ -46,8 +46,8 @@ const App = () => {
           <Routes>
             <Route path="/profile" element={<Profile />} />
             <Route path="/createpost" element={isAuthenticated ? <Createpost /> : <Navigate to="/login" />} />
-            <Route path="/createvideo" element={<Createvideo />} />
-            <Route path="/createblog" element={<Createblog />} />
+            <Route path="/createvideo" element={isAuthenticated ? <Createvideo /> :<Navigate to="/login"/>} />
+            <Route path="/createblog" element={ isAuthenticated ? <Createblog />:<Navigate to ="login"/>} />
             <Route path='/contact' element={<Contact/>}/>
             <Route path='/about' element={<About/>}/>
             <Route path='/edit-profile' element={<EditProfile/>}/>
