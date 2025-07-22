@@ -110,14 +110,23 @@ const [query, setQuery] = useState('');
     }
   };
 
- const handleSearch = () => {
-    if (!query.trim()) return;
-    navigate(`/search?q=${encodeURIComponent(query.trim())}`);
-  };
+//  const handleSearch = () => {
+//     if (!query.trim()) return;
+//     navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+//   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') handleSearch();
-  };
+//   const handleKeyPress = (e) => {
+//     if (e.key === 'Enter') handleSearch();
+//   };
+useEffect(() => {
+  const delayDebounce = setTimeout(() => {
+    if (query.trim()) {
+      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+    }
+  }, 300); // debounce to avoid firing too fast on every keystroke
+
+  return () => clearTimeout(delayDebounce);
+}, [query, navigate]);
 
 
   return (
@@ -129,14 +138,14 @@ const [query, setQuery] = useState('');
         </button>
 
     <div className="search-bar">
-      <input
-        type="text"
-        className="search-input"
-        placeholder="Search 🔍"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleKeyPress}
-      />
+<input
+  type="text"
+  className="search-input"
+  placeholder="Search 🔍"
+  value={query}
+  onChange={(e) => setQuery(e.target.value)}
+/>
+
       {/* <button className="search-btn" onClick={handleSearch}>
         🔍
       </button> */}
