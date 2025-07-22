@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
-import '../css/createvideo.css'; // Make sure this file exists and contains the CSS below
+import '../css/createvideo.css'; 
 import { FaFileUpload, FaPaperPlane, FaTimes, FaVideo } from 'react-icons/fa'; // Added icons
 
 export default function Createvideo() {
@@ -15,7 +15,6 @@ export default function Createvideo() {
     const [tagLoading, setTagLoading] = useState(false);
   
 
-  // Ref to access the file input
   const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
@@ -26,7 +25,6 @@ export default function Createvideo() {
     }
   };
 
-  // New function to clear the selected video file
   const clearVideo = () => {
     setFormData((prev) => ({ ...prev, video: null }));
     if (fileInputRef.current) {
