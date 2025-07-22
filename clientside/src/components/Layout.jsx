@@ -110,14 +110,6 @@ const [query, setQuery] = useState('');
     }
   };
 
-//  const handleSearch = () => {
-//     if (!query.trim()) return;
-//     navigate(`/search?q=${encodeURIComponent(query.trim())}`);
-//   };
-
-//   const handleKeyPress = (e) => {
-//     if (e.key === 'Enter') handleSearch();
-//   };
 useEffect(() => {
   const delayDebounce = setTimeout(() => {
     if (query.trim()) {
