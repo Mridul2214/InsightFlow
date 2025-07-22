@@ -1,0 +1,401 @@
+/* profile-page.css */
+
+/* --- Variables for Instagram-like Theme --- */
+:root {
+    /* Colors */
+    --insta-blue: #1e88e5; /* Primary blue from new CSS */
+    --insta-blue-hover: #1565c0; /* Darker blue from new CSS */
+    --insta-gray-light: #e3f2fd; /* Light background for tabs from new CSS */
+    --insta-gray-medium: #555; /* Medium gray for secondary text from new CSS */
+    --insta-gray-dark: #222; /* Dark gray for primary text from new CSS */
+    --insta-background: #f9f9f9; /* Light background from new CSS */
+    --insta-card-background: #ffffff; /* White card background */
+    --border-color: #ddd; /* Border color from new CSS */
+    --shadow-color: rgba(0, 0, 0, 0.06); /* Shadow from new CSS */
+
+    /* Font */
+    --font-family: 'Segoe UI', sans-serif; /* Font from new CSS */
+    --font-size-base: 16px;
+
+    /* Spacing */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --spacing-xl: 40px;
+}
+
+/* --- Dark Theme Variables (Optional, if you have a dark mode) --- */
+body.dark-theme {
+    --insta-blue: #3897f0;
+    --insta-blue-hover: #2186e0;
+    --insta-gray-light: #363636;
+    --insta-gray-medium: #a8a8a8;
+    --insta-gray-dark: #f5f5f5;
+    --insta-background: #1a1a1a;
+    --insta-card-background: #262626;
+    --border-color: #363636;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+/* --- Base Styles --- */
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    margin: 0;
+    padding: 0;
+    background-color: var(--insta-background);
+    color: var(--insta-gray-dark);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* --- Profile Container --- */
+.profile-container {
+    max-width: 960px; /* Max width from new CSS */
+    margin: auto; /* Centered */
+    padding: 2rem 1rem; /* Padding from new CSS */
+    background-color: var(--insta-card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- Profile Header --- */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* Gap from new CSS */
+    padding-bottom: 2rem; /* Padding from new CSS */
+    border-bottom: 1px solid var(--border-color); /* Border from new CSS */
+    margin-bottom: 2rem; /* Margin from new CSS */
+}
+
+@media (max-width: 767px) { /* Adjust for mobile, keeping header stacked */
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .user-main-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .profile-stats {
+        justify-content: center;
+    }
+    .profile-actions {
+        justify-content: center;
+    }
+}
+
+
+.profile-pic {
+    width: 140px; /* Size from new CSS */
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--insta-blue); /* Border color from new CSS */
+    background-color: var(--insta-card-background); /* Background from new CSS */
+    flex-shrink: 0;
+}
+
+.user-details {
+    flex: 1; /* Flex from new CSS */
+    text-align: left; /* Default to left for desktop */
+}
+
+.user-main-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Gap from new CSS */
+    margin-bottom: 0; /* Remove default margin */
+}
+
+.user-details h2 {
+    font-size: 1.8rem; /* Size from new CSS */
+    font-weight: 600; /* Weight from new CSS */
+    color: var(--insta-blue); /* Color from new CSS */
+    margin: 0;
+}
+
+.username {
+    color: var(--insta-gray-medium); /* Color from new CSS */
+    font-size: 1rem; /* Size from new CSS */
+    font-weight: 400; /* Default weight */
+}
+
+.user-email {
+    margin-top: 0.5rem; /* Margin from new CSS */
+    font-size: 0.9rem; /* Size from new CSS */
+    color: #444; /* Color from new CSS */
+    margin-bottom: 0.6rem; /* Adjust margin */
+}
+
+.user-bio {
+    margin: 0.6rem 0; /* Margin from new CSS */
+    font-style: italic; /* Style from new CSS */
+    color: #666; /* Color from new CSS */
+}
+
+.profile-stats {
+    display: flex;
+    gap: 2rem; /* Gap from new CSS */
+    margin: 1rem 0; /* Margin from new CSS */
+    font-size: 0.95rem; /* Size from new CSS */
+    color: var(--insta-gray-dark); /* Color from new CSS */
+}
+
+.profile-stats span b {
+    font-weight: 600;
+    margin-right: 5px;
+    color: var(--insta-gray-dark);
+}
+
+.profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align left for desktop */
+    gap: 0.5rem; /* Gap from new CSS */
+    margin-top: 0.5rem; /* Margin from new CSS */
+}
+
+.profile-actions button {
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profile-actions button:hover {
+    transform: translateY(-1px);
+}
+
+/* Merged edit-btn styles */
+.profile-actions .edit-btn {
+    background: #4a6baf; /* Color from new CSS */
+    color: white;
+    padding: 0.4rem 0.8rem; /* Padding from new CSS */
+    border-radius: 4px;
+    gap: 0.3rem; /* Gap from new CSS */
+    font-size: 0.9rem; /* Size from new CSS */
+}
+
+.profile-actions .edit-btn:hover {
+    background: #3a5a9f; /* Hover color from new CSS */
+}
+
+.profile-actions .edit-btn svg { /* Style for SVG icon inside edit-btn */
+    font-size: 0.9rem;
+}
+
+/* Merged logout-btn styles */
+.profile-actions .logout-btn {
+    background-color: var(--insta-blue); /* Use insta-blue for consistency */
+    color: #fff;
+    padding: 6px 14px; /* Padding from new CSS */
+    border-radius: 25px; /* Border-radius from new CSS */
+    font-size: 0.85rem; /* Size from new CSS */
+    margin-top: 0; /* Remove specific margin-top, let flex gap handle it */
+}
+
+.profile-actions .logout-btn:hover {
+    background-color: var(--insta-blue-hover); /* Hover color from new CSS */
+}
+
+
+/* --- Profile Tabs --- */
+.profile-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem; /* Gap from new CSS */
+    margin: 1.5rem 0; /* Margin from new CSS */
+    border-top: 1px solid var(--border-color); /* Kept from previous version */
+    padding-top: var(--spacing-md); /* Kept from previous version */
+}
+
+.profile-tabs button {
+    padding: 6px 16px; /* Padding from new CSS */
+    border: none;
+    border-radius: 18px; /* Border-radius from new CSS */
+    background: var(--insta-gray-light); /* Background from new CSS */
+    color: #1976d2; /* Color from new CSS */
+    cursor: pointer;
+    font-size: 0.85rem; /* Size from new CSS */
+    transition: all 0.3s ease;
+    border-top: none; /* Remove previous active indicator border */
+    margin-top: 0; /* Remove previous margin-top */
+}
+
+.profile-tabs button:hover {
+    background-color: var(--insta-blue-hover); /* Use insta-blue-hover for consistency */
+    color: var(--text-color-light); /* Ensure text is visible on hover */
+}
+
+.profile-tabs button.active {
+    background-color: var(--insta-blue); /* Active background from new CSS */
+    color: #fff; /* Active color from new CSS */
+    border-top-color: transparent; /* Ensure no top border */
+}
+body.dark-theme .profile-tabs button.active {
+    color: var(--insta-blue); /* Active color in dark theme */
+    border-top-color: var(--insta-blue); /* Re-add top border for dark theme active if desired */
+}
+
+
+/* --- Profile Content Area (Grid for Posts/Videos/Blogs) --- */
+.profile-content-area {
+    margin-top: 1rem; /* Margin from new CSS */
+}
+
+.profile-content-grid { /* New class for the grid container */
+    display: grid;
+    /* Adjusted minmax for slightly smaller items on mobile */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1.5rem; /* Gap from new CSS */
+}
+
+@media (min-width: 480px) {
+    .profile-content-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 600px) {
+    .profile-content-grid {
+        grid-template-columns: repeat(3, 1fr); /* Back to 3 columns for a less dense look */
+    }
+}
+
+@media (min-width: 900px) {
+    .profile-content-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns for desktop */
+    }
+}
+
+/* Content Card (replaces profile-grid-item for more structure) */
+.content-card {
+    background-color: var(--insta-card-background); /* Background from new CSS */
+    border-radius: 10px; /* Radius from new CSS */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition from new CSS */
+    box-shadow: 0 4px 12px var(--shadow-color); /* Shadow from new CSS */
+    border: 1px solid var(--border-color); /* Border from new CSS */
+    display: flex; /* Ensure content is stacked */
+    flex-direction: column;
+    position: relative; /* Added to establish stacking context for overlays */
+}
+
+.content-card:hover {
+    transform: translateY(-5px); /* Lift effect from new CSS */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow on hover */
+}
+
+.content-media { /* For images/videos within the card */
+    width: 100%;
+    height: 180px; /* Fixed height from new CSS */
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color); /* Border from new CSS */
+    display: block;
+}
+
+.card-details { /* For text content within the card */
+    padding: 1rem; /* Padding from new CSS */
+    flex-grow: 1; /* Allows details to push actions to bottom */
+}
+
+.card-details h4 {
+    margin: 0;
+    font-size: 1.1rem; /* Size from new CSS */
+    color: #1e1e1e; /* Color from new CSS */
+}
+
+.card-details p {
+    margin-top: 0.5rem; /* Margin from new CSS */
+    font-size: 0.9rem; /* Size from new CSS */
+    color: #444; /* Color from new CSS */
+}
+
+/* Card Actions (for buttons within the card) */
+.card-actions {
+    display: flex;
+    gap: 0.5rem; /* Gap from new CSS */
+    margin-top: 0.8rem; /* Margin from new CSS */
+    padding: 0 1rem 1rem; /* Add padding to align with card-details */
+    position: relative; /* Added to establish stacking context */
+    z-index: 3; /* Increased z-index to be above the overlay */
+}
+
+
+/* Delete Button (for content cards) */
+.delete-btn {
+    margin-top: 0; /* Handled by card-actions gap */
+    background-color: transparent;
+    border: 1px solid var(--insta-blue); /* Border from new CSS */
+    color: var(--insta-blue); /* Color from new CSS */
+    padding: 5px 12px; /* Padding from new CSS */
+    border-radius: 20px; /* Radius from new CSS */
+    font-size: 0.8rem; /* Size from new CSS */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: var(--insta-blue); /* Hover background from new CSS */
+    color: #fff; /* Hover color from new CSS */
+}
+
+/* Empty State */
+.no-content-message {
+    text-align: center;
+    padding: 2rem; /* Padding from new CSS */
+    color: #888; /* Color from new CSS */
+    font-style: italic; /* Style from new CSS */
+}
+
+/* The overlay effects from previous version, adapted for content-card */
+.content-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); /* Transparent by default */
+    transition: background 0.3s ease;
+    z-index: 1; /* Overlay is z-index 1 */
+    pointer-events: none; /* Added to allow clicks to pass through the overlay */
+}
+
+
+
+.content-card .item-title { /* For title overlay on hover (if applicable) */
+    color: var(--text-color-light);
+    font-size: 1.2em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    z-index: 2; /* Title is z-index 2 */
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.content-card:hover .item-title {
+    opacity: 1;
+}

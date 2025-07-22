@@ -1,0 +1,25 @@
+:root {
+  --accent: #007bff;
+  --accent-hover: #0056b3;
+  --text: #000000;
+  --border: #ccc;
+}
+
+.dark-theme {
+  --accent: #ff4b5c;
+  --accent-hover: #c0392b;
+  --text: #ffffff;
+  --border: #444;
+}
+
+/* :root {
+  --text: #fff;
+  --accent: #ff4c4c;
+  --accent-hover: #e04444;
+  --border: #ccc;
+} */
+:root {
+  /* ... other variables ... */
+  --sidebar-width: 100px; /* ⬅️ Reduced from 240px to 180px */
+  --sidebar-collapsed-width: 72px;
+}

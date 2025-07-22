@@ -1,0 +1,327 @@
+/* Variables for consistency (optional, but good practice) */
+:root {
+    --youtube-red: #ff0000;
+    --youtube-red-hover: #cc0000;
+    --text-color-primary: #030303; /* Dark text for light theme */
+    --text-color-secondary: #606060; /* Lighter text for light theme */
+    --border-color: #e0e0e0;
+    --bg-color-light: #f9f9f9;
+    --button-bg: #e0e0e0;
+    --button-text: #030303;
+    --button-hover-bg: #d0d0d0;
+}
+
+/* Dark theme variables (if you have a dark theme toggle) */
+.dark-theme {
+    --text-color-primary: #f1f1f1;
+    --text-color-secondary: #aaa;
+    --border-color: #383838;
+    --bg-color-light: #181818;
+    --button-bg: #383838;
+    --button-text: #f1f1f1;
+    --button-hover-bg: #4c4c4c;
+}
+
+/* --- Post Container --- */
+.post-container {
+    display: flex;
+    flex-direction: column; /* Default to column for mobile-first approach */
+    max-width: 1200px; /* Max width for the entire post */
+    margin: 20px auto; /* Center the container */
+    padding: 15px;
+    background-color: var(--bg-color-light);
+    color: var(--text-color-primary);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 992px) { /* Desktop layout */
+    .post-container {
+        flex-direction: row; /* Side-by-side on desktop */
+        align-items: flex-start; /* Align content to the top */
+        padding: 25px;
+    }
+}
+
+/* --- Main Post Content Area --- */
+.post-content {
+    flex: 3; /* Takes more space on desktop */
+    padding-right: 20px; /* Space between content and comments */
+    margin-bottom: 20px; /* Space when stacked on mobile */
+}
+
+@media (min-width: 992px) {
+    .post-content {
+        margin-bottom: 0; /* Remove bottom margin on desktop */
+    }
+}
+
+.post-image {
+    width: 100%;
+    /* Aspect ratio for YouTube-like video frame (16:9) */
+    aspect-ratio: 16 / 9;
+    object-fit: cover; /* Ensures image covers the area without distortion */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: block; /* Removes extra space below image */
+}
+
+.post-content h2 {
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.3;
+    color: var(--text-color-primary);
+}
+
+.post-description {
+    font-size: 1em;
+    color: var(--text-color-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    white-space: pre-wrap; /* Preserves whitespace and line breaks */
+}
+
+/* --- Reactions --- */
+.post-reactions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.post-reaction-btn {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px; /* Pill shape */
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-reaction-btn:hover {
+    background-color: var(--button-hover-bg);
+    transform: translateY(-1px);
+}
+
+.post-reaction-btn.active {
+    background-color: var(--youtube-red);
+    color: white;
+}
+.post-reaction-btn.active:hover {
+    background-color: var(--youtube-red-hover);
+}
+
+
+/* --- Uploader Info --- */
+.post-uploader {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 15px;
+    margin-bottom: 20px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.post-uploader-name {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 0; /* Override default h4 margin */
+    color: var(--text-color-primary);
+}
+
+.post-uploader-name.clickable {
+    cursor: pointer;
+    text-decoration: none; /* Remove default underline */
+}
+
+.post-uploader-name.clickable:hover {
+    text-decoration: underline;
+    color: var(--youtube-red); /* Highlight on hover */
+}
+
+.post-uploader p {
+    font-size: 0.9em;
+    color: var(--text-color-secondary);
+    margin: 0;
+}
+
+.post-follow-btn {
+    background-color: var(--youtube-red);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    font-weight: 500;
+    margin-left: auto; /* Push button to the right */
+}
+
+.post-follow-btn:hover:not(:disabled) {
+    background-color: var(--youtube-red-hover);
+}
+
+.post-follow-btn.unfollow {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--border-color);
+}
+
+.post-follow-btn.unfollow:hover:not(:disabled) {
+    background-color: var(--button-hover-bg);
+}
+
+.post-follow-btn:disabled {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* --- Comments Section --- */
+.post-comments {
+    flex: 2; /* Takes less space than main content on desktop */
+    min-width: 300px; /* Ensure it has a minimum width on desktop */
+}
+
+@media (max-width: 991px) { /* Adjust for smaller screens (tablets/mobile) */
+    .post-comments {
+        flex: none; /* Remove flex sizing */
+        width: 100%; /* Take full width */
+        padding-left: 0; /* Remove left padding */
+    }
+}
+
+.post-comments h3 {
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text-color-primary);
+}
+
+.post-comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.post-comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    background-color: var(--bg-color-light); /* Match background */
+    color: var(--text-color-primary);
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.post-comment-form textarea::placeholder {
+    color: var(--text-color-secondary);
+}
+
+.post-comment-submit-btn {
+    align-self: flex-end; /* Align to the right */
+    background-color: var(--youtube-red);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.post-comment-submit-btn:hover {
+    background-color: var(--youtube-red-hover);
+}
+
+.post-comments-list {
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.post-comment {
+    background-color: transparent; /* No background for individual comments */
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-comment:last-child {
+    border-bottom: none; /* No border for the last comment */
+}
+
+.post-comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.post-comment-username {
+    font-weight: 600;
+    color: var(--text-color-primary);
+    font-size: 0.95em;
+    margin-right: 8px;
+}
+
+.post-comment-username.clickable {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.post-comment-username.clickable:hover {
+    text-decoration: underline;
+    color: var(--youtube-red);
+}
+
+.post-comment-text {
+    font-size: 0.9em;
+    color: var(--text-color-primary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.post-no-comments {
+    font-style: italic;
+    color: var(--text-color-secondary);
+    text-align: center;
+    padding: 20px;
+}
+
+/* Scrollbar for comments (optional, if list gets very long) */
+.post-comments-list {
+    max-height: 500px; /* Or a suitable height */
+    overflow-y: auto;
+    padding-right: 5px; /* Space for scrollbar */
+}
+
+/* Custom Scrollbar (optional, for aesthetics) */
+.post-comments-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.post-comments-list::-webkit-scrollbar-track {
+    background: var(--bg-color-light);
+    border-radius: 10px;
+}
+
+.post-comments-list::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+
+.post-comments-list::-webkit-scrollbar-thumb:hover {
+    background: var(--text-color-secondary);
+}

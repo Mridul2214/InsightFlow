@@ -1,0 +1,215 @@
+/* Assuming Layout.css variables like --bg, --text, --border, --youtube-blue, --hover-bg are accessible */
+/* If not, define them or import Layout.css */
+:root {
+    --accent-color: #3ea6ff; /* A vibrant blue for buttons, borders, highlights */
+    --accent-hover: #2a8bff; /* Slightly darker blue on hover */
+    --card-bg-light: #ffffff; /* White background for the form card in light mode */
+    --card-bg-dark: #202020; /* Dark background for the form card in dark mode */
+    --input-bg-light: #f0f0f0; /* Light background for inputs */
+    --input-bg-dark: #333333; /* Dark background for inputs */
+    --placeholder-color-light: #888;
+    --placeholder-color-dark: #bbb;
+    --success-color: #28a745; /* Green for success messages */
+    --error-color: #dc3545; /* Red for error messages */
+}
+
+/* Page container for centering the form */
+.create-blog-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - var(--navbar-height)); /* Fill remaining vertical space */
+    padding: 30px 20px; /* Padding for mobile */
+    background-color: var(--bg); /* Use global background color */
+    color: var(--text); /* Use global text color */
+    box-sizing: border-box; /* Include padding in height calculation */
+}
+
+/* Main form card styling */
+.blog-upload-card { /* Specific class for blog upload card */
+    background: var(--card-bg-light); /* Default for light theme */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* More prominent shadow */
+    padding: 40px; /* Generous padding inside the card */
+    max-width: 800px; /* Wider max-width for blog content */
+    width: 100%; /* Take full width up to max-width */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Theme specific card background */
+body.dark-theme .blog-upload-card {
+    background: var(--card-bg-dark);
+}
+
+.card-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px; /* Larger title */
+    color: var(--accent-color); /* Use accent color for title */
+    font-weight: 700;
+}
+
+.create-blog-form { /* Specific class for the form */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Increased gap between form groups */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.form-input,
+.form-textarea {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background-color: var(--input-bg-light); /* Default for light theme */
+    color: var(--text);
+    font-size: 16px;
+    transition: all 0.3s ease; /* Smooth transitions for focus */
+    box-sizing: border-box; /* Include padding in width */
+    width: 100%; /* Ensure inputs take full width */
+    min-height: 50px; /* Minimum height for inputs */
+    resize: vertical; /* Allow vertical resizing for textarea */
+}
+
+/* Theme specific input background */
+body.dark-theme .form-input,
+body.dark-theme .form-textarea {
+    background-color: var(--input-bg-dark);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--placeholder-color-light);
+    opacity: 1; /* Ensure placeholder is visible */
+}
+
+body.dark-theme .form-input::placeholder,
+body.dark-theme .form-textarea::placeholder {
+    color: var(--placeholder-color-dark);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(62, 166, 255, 0.3); /* Subtle focus ring */
+}
+
+/* Submit Button */
+.submit-btn {
+    background: var(--accent-color);
+    border: none;
+    padding: 14px 20px; /* More padding */
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px; /* Larger text */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Space between icon and text */
+    margin-top: 10px; /* Space above button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.8;
+}
+
+/* Message Display */
+.form-message {
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 15px;
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 0.5s forwards; /* Fade in animation */
+}
+
+.form-message.success {
+    background-color: rgba(40, 167, 69, 0.15); /* Light green background */
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+
+.form-message.error {
+    background-color: rgba(220, 53, 69, 0.15); /* Light red background */
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .blog-upload-card {
+        padding: 30px;
+        margin: 20px; /* Adjust margin for smaller screens */
+    }
+    .card-title {
+        font-size: 24px;
+    }
+    .form-input,
+    .form-textarea {
+        font-size: 15px;
+        padding: 10px 12px;
+    }
+    .submit-btn {
+        font-size: 16px;
+        padding: 12px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .blog-upload-card {
+        padding: 20px;
+        margin: 15px;
+        border-radius: 10px;
+    }
+    .card-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        font-size: 14px;
+    }
+    .form-input,
+    .form-textarea {
+        font-size: 14px;
+    }
+    .submit-btn {
+        font-size: 15px;
+        padding: 10px 15px;
+    }
+    .form-message {
+        font-size: 14px;
+    }
+}

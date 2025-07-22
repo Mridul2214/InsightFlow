@@ -1,0 +1,44 @@
+.video-page {
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem;
+}
+
+.video-player {
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.video-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.video-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.comments-section {
+  margin-top: 20px;
+}
+
+.comment-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.comment-form input {
+  flex: 1;
+  padding: 8px;
+}
+
+.comments-list .comment {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 0;
+}

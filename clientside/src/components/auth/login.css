@@ -1,0 +1,125 @@
+:root {
+  --accent: #007bff;
+  --accent-hover: #0056b3;
+  --text: #000;
+  --border: #ccc;
+  --bg: #fff;
+}
+
+.dark-theme {
+  --accent: #ff4b5c;
+  --accent-hover: #c0392b;
+  --text: #fff;
+  --border: #444;
+  --bg: #1e1e1e;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container {
+  width: 100%;
+  height: 100vh;
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg);
+  padding: 35px 30px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  position: relative;
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: var(--accent);
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 10;
+}
+
+.close-btn:hover {
+  color: var(--accent);
+  transform: rotate(90deg) scale(1.2);
+}
+
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-container input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--text);
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.auth-container input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 5px var(--accent);
+}
+
+.auth-container button[type="submit"] {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--accent);
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.auth-container button[type="submit"]:hover {
+  background-color: var(--accent-hover);
+}
+
+.auth-container p {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.auth-container span {
+  color: var(--accent);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.auth-container span:hover {
+  text-decoration: underline;
+}

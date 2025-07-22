@@ -1,0 +1,269 @@
+/* Common variables from Layout.css will be used */
+:root {
+    --accent-color: #3ea6ff;
+    --accent-hover: #2a8bff;
+    --card-bg-light: #ffffff;
+    --card-bg-dark: #202020;
+    --text-light-muted: #606060;
+    --text-dark-muted: #aaaaaa;
+}
+
+/* Page container */
+.about-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top of available space */
+    min-height: calc(100vh - var(--navbar-height));
+    padding: 30px 20px;
+    background-color: var(--bg);
+    color: var(--text);
+    box-sizing: border-box;
+}
+
+/* Central card styling */
+.about-card {
+    background: var(--card-bg-light);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    max-width: 800px; /* Wider max-width for content-heavy page */
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+body.dark-theme .about-card {
+    background: var(--card-bg-dark);
+}
+
+.card-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 36px; /* Larger title for main page heading */
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.card-description {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-light-muted);
+    body.dark-theme & {
+        color: var(--text-dark-muted);
+    }
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0; /* More spacing for dividers */
+}
+
+/* Section styling */
+.about-section {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content within section */
+    text-align: center;
+}
+
+.section-icon {
+    font-size: 50px; /* Large icons for sections */
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.about-section h3 {
+    font-size: 28px;
+    color: var(--text);
+    margin-bottom: 15px;
+}
+
+.about-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-light-muted);
+    body.dark-theme & {
+        color: var(--text-dark-muted);
+    }
+    max-width: 650px; /* Limit paragraph width for readability */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Feature List */
+.feature-list {
+    list-style: none; /* Remove default list style */
+    padding: 0;
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid for features */
+    gap: 15px;
+}
+
+.feature-list li {
+    background: var(--card-bg-light); /* Use card background for list items */
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+}
+
+body.dark-theme .feature-list li {
+    background: var(--card-bg-dark);
+}
+
+.feature-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.feature-icon {
+    font-size: 28px;
+    color: var(--accent-color);
+    flex-shrink: 0;
+}
+
+/* Call to Action Section */
+.about-call-to-action {
+    text-align: center;
+    padding: 30px 20px;
+    background: var(--input-bg-light); /* Use a distinct background for CTA */
+    body.dark-theme & {
+        background: var(--input-bg-dark);
+    }
+    border-radius: 12px;
+    margin-top: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.about-call-to-action h3 {
+    font-size: 28px;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.about-call-to-action p {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: var(--text);
+}
+
+.join-now-btn {
+    padding: 15px 30px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 30px; /* Pill-shaped button */
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.join-now-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .about-card {
+        padding: 30px;
+        margin: 20px;
+    }
+    .card-title {
+        font-size: 32px;
+    }
+    .card-description {
+        font-size: 15px;
+    }
+    .about-section h3 {
+        font-size: 24px;
+    }
+    .about-section p, .feature-list li, .about-call-to-action p {
+        font-size: 15px;
+    }
+    .section-icon {
+        font-size: 40px;
+    }
+    .feature-icon {
+        font-size: 24px;
+    }
+    .join-now-btn {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-card {
+        padding: 20px;
+        margin: 15px;
+        border-radius: 10px;
+    }
+    .card-title {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+    .card-description {
+        font-size: 14px;
+    }
+    .about-section {
+        margin-bottom: 20px;
+    }
+    .about-section h3 {
+        font-size: 22px;
+    }
+    .about-section p {
+        font-size: 14px;
+    }
+    .feature-list {
+        grid-template-columns: 1fr; /* Single column for features */
+    }
+    .feature-list li {
+        font-size: 14px;
+        padding: 15px;
+    }
+    .section-icon {
+        font-size: 35px;
+    }
+    .feature-icon {
+        font-size: 20px;
+    }
+    .join-now-btn {
+        font-size: 15px;
+        padding: 10px 20px;
+    }
+}
+.admin-login-btn {
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  padding: 10px 15px; /* Padding for better appearance */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Readable font size */
+  position: absolute; /* Position it absolutely */
+  top: 80px; /* Distance from top */
+  right: 20px; /* Distance from right */
+  z-index: 100; /* Ensure it's above other elements */
+}
+
+.admin-login-btn:hover {
+  background-color: #45a049; /* Darker green on hover */
+}

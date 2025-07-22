@@ -1,0 +1,78 @@
+import express from 'express';
+import dotenv from 'dotenv'; 
+import connection from './config/connection.js';
+import cors from 'cors';
+import authRoutes from './routes/authRoutes.js';
+import postRoutes from './routes/postRoutes.js';
+import videoRoutes from './routes/videoRoutes.js';
+import aiRoutes from './routes/aiRoutes.js';
+import blogRoutes from './routes/blogRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import followRoutes from './routes/followRoutes.js'
+import commentsRoutes from './routes/commentRoutes.js'
+import reactionRoutes from './routes/reactionRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
+import historyRoutes from './routes/historyRoutes.js'
+import searchRoutes from './routes/searchRoutes.js'
+import { fileURLToPath } from 'url';
+import path from 'path';
+// import axios from 'axios'; 
+
+dotenv.config();
+const app = express();
+const PORT = process.env.PORT || 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const corsOptions = {
+  origin: 'http://localhost:5173', // Your frontend URL
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+
+// app.use(cors());
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// app.use('/uploads/videos', express.static(path.join('uploads/videos')));
+// app.use('/uploads/profilePics', express.static(path.join('uploads/profilePics')));
+
+connection(); // Connect to MongoDB
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/videos', videoRoutes);
+app.use('/api/blogs', blogRoutes);
+app.use('/api/ai', aiRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/follow',followRoutes);
+app.use('/api/reactions',reactionRoutes);
+app.use('/api/comments',commentsRoutes)
+app.use('/api/admin', adminRoutes);
+app.use('/api/history', historyRoutes)
+app.use('/api/search', searchRoutes);
+
+// ❌ Removed YouTube support
+// app.get('/api/youtube/search', async (req, res) => {
+//   try {
+//     const { q } = req.query;
+//     const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+//       params: {
+//         part: 'snippet',
+//         maxResults: 30,
+//         q: q || 'react js',
+//         key: process.env.YOUTUBE_API_KEY, // Also remove from .env if no longer needed
+//       },
+//     });
+
+//     res.json(response.data);
+//   } catch (error) {
+//     console.error('YouTube API Error:', error.response?.data || error.message);
+//     res.status(500).json({ error: 'Failed to fetch YouTube videos' });
+//   }
+// });
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
