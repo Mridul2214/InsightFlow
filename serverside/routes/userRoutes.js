@@ -1,10 +1,11 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { getUserProfile, getFollowerCount,updateUserProfile ,
+import {
+  getUserProfile, getFollowerCount, updateUserProfile,
   checkFollowStatus,
   getUserPosts,
   getUserVideos,
-  getUserBlogs,getLikedContentByUserId
+  getUserBlogs, getLikedContentByUserId,
 } from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
 // import Reaction from '../models/reaction.model.js';
@@ -13,6 +14,8 @@ import multer from 'multer'
 // import User from '../models/user.model.js' 
 
 const router = express.Router();
+
+
 
 router.get('/:id', getUserProfile);
 // router.post('/follow', protect, followUser);
@@ -35,18 +38,14 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
-// At the top of your backend file (controller or route file)
 
-// router.get('/:id', getUserProfile);
 router.put('/update/:id', protect, upload.single('profilePic'), updateUserProfile);
-router.get('/is-following/:userId',protect,checkFollowStatus);
-router.get('/:id/posts',getUserPosts);
-router.get('/:id/videos',getUserVideos);
-router.get('/:id/blogs',getUserBlogs);
-// router.put('/update/:id', protect, upload.single('profilePic'), updateUserProfile);
+router.get('/is-following/:userId', protect, checkFollowStatus);
+router.get('/:id/posts', getUserPosts);
+router.get('/:id/videos', getUserVideos);
+router.get('/:id/blogs', getUserBlogs);
 
 
-// Add this new endpoint
 router.get('/:userId', async (req, res) => {
   try {
     const user = await User.findById(req.params.userId).select('name username'); // Only return name/username
@@ -59,28 +58,7 @@ router.get('/:userId', async (req, res) => {
   }
 });
 
-router.get('/:userId/liked-content',getLikedContentByUserId )
-
-// Example: Fetch posts by a specific user
-// router.get('/:userId/posts', async (req, res) => {
-//   try {
-//     const posts = await Post.find({ uploader: req.params.userId })
-//       .populate('uploader', 'name username avatar')
-//       .sort({ createdAt: -1 })
-//       .lean();
-      
-//     res.json(posts.map(post => ({
-//       ...post,
-//       uploaderName: post.uploader?.name || 'Community Member'
-//     })));
-//   } catch (err) {
-//     res.status(500).json({ message: 'Server error' });
-//   }
-// });
-
-// routes/user.js
-// router.get('/liked-content', auth, async (req, res) => { ... });
-
+router.get('/:userId/liked-content', getLikedContentByUserId)
 
 
 export default router;

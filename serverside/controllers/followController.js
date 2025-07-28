@@ -32,24 +32,24 @@ export const toggleFollow = async (req, res) => {
 export const getFollowerCount = async (req, res) => {
   try {
     console.log('Received request for user:', req.params.userId); // Debug log
-    
+
     if (!mongoose.Types.ObjectId.isValid(req.params.userId)) {
       console.error('Invalid ID format:', req.params.userId);
       return res.status(400).json({ error: "Invalid user ID format" });
     }
-    
-    const count = await Follow.countDocuments({ 
-      following: req.params.userId 
+
+    const count = await Follow.countDocuments({
+      following: req.params.userId
     });
-    
+
     console.log('Returning count:', count); // Debug log
     res.json({ count });
-    
+
   } catch (err) {
     console.error('Follower count error:', err); // Detailed error
-    res.status(500).json({ 
+    res.status(500).json({
       error: "Server error",
-      details: err.message 
+      details: err.message
     });
   }
 };

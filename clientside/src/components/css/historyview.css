@@ -1,9 +1,46 @@
-/* HistoryView.css */
+/* === Theme Variables === */
+:root {
+  /* --bg-color: #ffffff; */
+  --text-color: #24292e;
+  --subtext-color: #586069;
+  --muted-bg: #f6f8fa;
+  --border-color: #e1e4e8;
+  --highlight-border: #c8e1ff;
+  --accent-color: #0366d6;
+  --btn-bg: #d73a49;
+  --btn-hover: #b31d28;
+  --back-btn-bg: #f6f8fa;
+  --back-btn-hover: #e1e4e8;
+  --item-type-bg: #f1f8ff;
+  --spinner-bg: #e1e4e8;
+  --spinner-top: #0366d6;
+}
+
+[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #e1e4e8;
+  --subtext-color: #999999;
+  --muted-bg: #1f1f1f;
+  --border-color: #333;
+  --highlight-border: #005cc5;
+  --accent-color: #58a6ff;
+  --btn-bg: #d73a49;
+  --btn-hover: #b31d28;
+  --back-btn-bg: #2c2c2c;
+  --back-btn-hover: #3a3a3a;
+  --item-type-bg: #002a4e;
+  --spinner-bg: #333;
+  --spinner-top: #58a6ff;
+}
+
+/* === History View Layout === */
 .history-view-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .history-header {
@@ -12,20 +49,20 @@
   align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #e1e4e8;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .history-header h1 {
   font-size: 1.8rem;
-  color: #24292e;
+  color: var(--text-color);
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 .back-button {
-  background: #f6f8fa;
-  border: 1px solid #d1d5da;
+  background: var(--back-btn-bg);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 0.5rem 1rem;
   display: flex;
@@ -33,14 +70,15 @@
   gap: 0.5rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  color: var(--text-color);
 }
 
 .back-button:hover {
-  background: #e1e4e8;
+  background: var(--back-btn-hover);
 }
 
 .clear-history {
-  background: #d73a49;
+  background: var(--btn-bg);
   color: white;
   border: none;
   border-radius: 6px;
@@ -53,19 +91,19 @@
 }
 
 .clear-history:hover {
-  background: #b31d28;
+  background: var(--btn-hover);
 }
 
 .empty-history {
   text-align: center;
   padding: 3rem;
-  background: #f6f8fa;
+  background: var(--muted-bg);
   border-radius: 6px;
-  border: 1px dashed #d1d5da;
+  border: 1px dashed var(--border-color);
 }
 
 .empty-history p {
-  color: #586069;
+  color: var(--subtext-color);
   font-size: 1.1rem;
   margin: 0.5rem 0;
 }
@@ -73,7 +111,7 @@
 .empty-history p:first-child {
   font-size: 1.3rem;
   font-weight: 500;
-  color: #24292e;
+  color: var(--text-color);
 }
 
 .history-list {
@@ -83,8 +121,8 @@
 }
 
 .history-item {
-  background: white;
-  border: 1px solid #e1e4e8;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 1.25rem;
   cursor: pointer;
@@ -94,7 +132,7 @@
 }
 
 .history-item:hover {
-  border-color: #c8e1ff;
+  border-color: var(--highlight-border);
   box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.1);
   transform: translateY(-2px);
 }
@@ -105,7 +143,7 @@
 
 .item-content h3 {
   margin: 0 0 0.5rem 0;
-  color: #0366d6;
+  color: var(--accent-color);
   font-size: 1.1rem;
   font-weight: 600;
 }
@@ -118,8 +156,8 @@
 }
 
 .item-type {
-  background: #f1f8ff;
-  color: #0366d6;
+  background: var(--item-type-bg);
+  color: var(--accent-color);
   padding: 0.25rem 0.5rem;
   border-radius: 12px;
   font-size: 0.8rem;
@@ -128,14 +166,14 @@
 }
 
 .item-date {
-  color: #586069;
+  color: var(--subtext-color);
   font-size: 0.85rem;
   display: flex;
   align-items: center;
   gap: 0.3rem;
 }
 
-/* Loading spinner */
+/* Loading Spinner */
 .loading-spinner {
   display: flex;
   justify-content: center;
@@ -146,8 +184,8 @@
   content: "";
   width: 2rem;
   height: 2rem;
-  border: 3px solid #e1e4e8;
-  border-top-color: #0366d6;
+  border: 3px solid var(--spinner-bg);
+  border-top-color: var(--spinner-top);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -158,22 +196,22 @@
   }
 }
 
-/* Responsive adjustments */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .history-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
-  
+
   .history-header h1 {
     font-size: 1.5rem;
   }
-  
+
   .history-view-page {
     padding: 1rem;
   }
-  
+
   .item-meta {
     flex-direction: column;
     align-items: flex-start;

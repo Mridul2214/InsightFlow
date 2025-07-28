@@ -148,11 +148,6 @@ export default function Createvideo() {
             {/* Display video preview if a file is selected */}
             {formData.video && (
               <div className="video-preview-container">
-                {/* Note: Direct video preview for local files might not work consistently across browsers
-                           without additional setup (e.g., streaming). Showing the file name is more reliable.
-                           A simple <video> tag with URL.createObjectURL could work for *some* cases locally.
-                           For robust previews, usually you'd upload, get a server URL, then show.
-                */}
                 <FaVideo className="video-placeholder-icon" />
                 <span className="video-preview-text">Selected: {formData.video.name}</span>
                 <button type="button" className="clear-video-btn" onClick={clearVideo}>

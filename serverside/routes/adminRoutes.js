@@ -11,7 +11,7 @@ import {
 import { adminAuth } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
-router.post('/login',adminLogin)
+router.post('/login', adminLogin)
 
 // Admin dashboard stats
 
@@ -20,5 +20,5 @@ router.get('/users', adminAuth, getAllUsers);
 router.patch('/users/:userId', adminAuth, manageUserStatus);
 router.get('/content/:type', adminAuth, getAllContent);
 router.patch('/content/:type/:id', adminAuth, manageContent);
-router.get('/verify',adminAuth,verifyAdmin)
+router.get('/verify', adminAuth, verifyAdmin)
 export default router;

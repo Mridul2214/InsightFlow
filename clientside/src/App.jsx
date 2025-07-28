@@ -27,57 +27,58 @@ import Likedcontent from './components/pages/Likedcontent';
 import Subcription from './components/pages/Subcription';
 import AdminLogin from './components/admindashboard/Adminlogin';
 import SearchResults from './components/pages/Searchresult';
+import Protect from './components/auth/Protect';
 
 
 const App = () => {
   const isAuthenticated = localStorage.getItem('token');
 
   return (
-            
+
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        
-        <Route path='/adminpage/*' element={<AdminDashboard/>}/>
-       <Route path='/adminlogin' element={<AdminLogin/>}/>
-        <Route path="/*" element={<Layout> 
+
+        <Route path='/adminpage/*' element={<AdminDashboard />} />
+        <Route path='/adminlogin' element={<AdminLogin />} />
+        <Route path="/*" element={<Layout>
           <Routes>
             <Route path="/profile" element={<Profile />} />
-            <Route path="/createpost" element={isAuthenticated ? <Createpost /> : <Navigate to="/login" />} />
-            <Route path="/createvideo" element={isAuthenticated ? <Createvideo /> :<Navigate to="/login"/>} />
-            <Route path="/createblog" element={ isAuthenticated ? <Createblog />:<Navigate to ="login"/>} />
-            <Route path='/contact' element={<Contact/>}/>
-            <Route path='/about' element={<About/>}/>
-            <Route path='/edit-profile' element={<EditProfile/>}/>
-            <Route path='/posts/:postId' element={<PostDetail/>}/>
-            <Route path='/blogs/:blogId' element={<Blogdetail/>}/>
-            <Route path='/videos/:videoId' element={<VideoDetail/>}/>
+            <Route path="/createpost" element={isAuthenticated ? <Createpost />: <Navigate to="/login" />} />
+            <Route path="/createvideo" element={isAuthenticated ? <Createvideo /> : <Navigate to="/login" />} />
+            <Route path="/createblog" element={isAuthenticated ? <Createblog /> : <Navigate to="login" />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/edit-profile' element={<EditProfile />} />
+            <Route path='/posts/:postId' element={<PostDetail />} />
+            <Route path='/blogs/:blogId' element={<Blogdetail />} />
+            <Route path='/videos/:videoId' element={<VideoDetail />} />
             <Route path="/profile/:userId" element={<ProfileView />} />
-            <Route path='/subcription' element={<Subcription/>}/>
-            <Route path='/search' element={<SearchResults/>}/>
+            <Route path='/subcription' element={<Subcription />} />
+            <Route path='/search' element={<SearchResults />} />
             {/* <Route path='/video/youtube/:id' element={<Videopage type='youtube'/>}/> */}
             {/* <Route path='youtube' element={<YoutubeFeed/>}/> */}
-            <Route path="/" element={<Home/>} />
-            <Route path='/posts' element={<Home/>}/>
-            <Route path='/videos' element={<Home/>}/>
-            <Route path='/blogs' element={<Home/>}/>
-            <Route path='/?sort=recent' element={<Home/>}/>
-            <Route path='/?sort=popular' element={<Home/>}/>
-            <Route path='/?sort=trending' element={<Home/>}/>
-            <Route path='/your-content' element={<YourContent/>}/> 
-            <Route path='/edit-post/:id' element={<EditPost/>}/> 
-            <Route path='/edit-video/:id' element={<EditVideo/>}/> 
-            <Route path='/edit-blog/:id' element={<EditBlogPage/>}/>  
-            <Route path='/users/:userId/liked-content' element={<Likedcontent/>}/>    
-            <Route path='/history' element={<HistoryView/>}/>
+            <Route path="/" element={<Home />} />
+            <Route path='/posts' element={<Home />} />
+            <Route path='/videos' element={<Home />} />
+            <Route path='/blogs' element={<Home />} />
+            <Route path='/?sort=recent' element={<Home />} />
+            <Route path='/?sort=popular' element={<Home />} />
+            <Route path='/?sort=trending' element={<Home />} />
+            <Route path='/your-content' element={<YourContent />} />
+            <Route path='/edit-post/:id' element={<EditPost />} />
+            <Route path='/edit-video/:id' element={<EditVideo />} />
+            <Route path='/edit-blog/:id' element={<EditBlogPage />} />
+            <Route path='/users/:userId/liked-content' element={<Likedcontent />} />
+            <Route path='/history' element={<HistoryView />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Layout>} />
       </Routes>
     </BrowserRouter>
-            
+
   );
 };
 

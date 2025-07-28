@@ -7,7 +7,8 @@ export default function PostDetail() {
   const { postId } = useParams();
   const navigate = useNavigate();
   const BASE_URL = 'http://localhost:3000';
-  
+   const [isSaved, setIsSaved] = useState(false);
+    const [saveLoading, setSaveLoading] = useState(false);
 
   const [post, setPost] = useState(null);
   const [likes, setLikes] = useState(0);
@@ -63,7 +64,7 @@ const fetchPostData = async () => {
 
 
 useEffect(() => {
-  if (!post?._id) return; // Skip if post or post._id is missing
+  if (!post?._id) return; 
 
   const fetchReactions = async () => {
     try {
@@ -81,7 +82,6 @@ useEffect(() => {
 
 
 
-// Example of how your handleReaction should look
 const handleReaction = async (reactionType) => {
   // Optimistic UI update
   if (reactionType === 'like') {
@@ -230,12 +230,7 @@ const navigateToUserProfile = () => {
 };
 
 
-  //   const getUploaderName = () => {
-  //   if (!post) return 'Unknown User';
-  //   if (post.uploaderName) return post.uploaderName;
-  //   if (post.uploader?.username) return post.uploader.username;
-  //   return 'Unknown User';
-  // };
+
 
 
 // Add this useEffect hook to fetch comments when the component mounts
@@ -294,6 +289,63 @@ useEffect(() => {
 }, [post?._id, post?.title]);
 
 
+  // useEffect(() => {
+  //   const checkIfSaved = async () => {
+  //     if (!user || !postId) return;
+      
+  //     try {
+  //       const res = await axios.get(
+  //         `${BASE_URL}/api/saved/check/${postId}/post`,
+  //         config
+  //       );
+  //       setIsSaved(res.data.isSaved);
+  //     } catch (err) {
+  //       console.error('Error checking saved status:', err);
+  //     }
+  //   };
+    
+  //   checkIfSaved();
+  // }, [postId, user]);
+
+  // // Add this function to handle save/unsave
+  // const handleSave = async () => {
+  //   if (!user) {
+  //     alert('Please login to save posts');
+  //     return;
+  //   }
+    
+  //   setSaveLoading(true);
+    
+  //   try {
+  //     if (isSaved) {
+  //       // First find the saved item ID (this could be optimized)
+  //       const res = await axios.get(
+  //         `${BASE_URL}/api/saved/check/${postId}/post`,
+  //         config
+  //       );
+        
+  //       if (res.data.isSaved) {
+  //         await axios.delete(
+  //           `${BASE_URL}/api/saved/${res.data.savedItemId}`,
+  //           config
+  //         );
+  //       }
+  //     } else {
+  //       await axios.post(
+  //         `${BASE_URL}/api/saved`,
+  //         { contentId: postId, contentType: 'post' },
+  //         config
+  //       );
+  //     }
+      
+  //     setIsSaved(!isSaved);
+  //   } catch (err) {
+  //     console.error('Error toggling save:', err);
+  //   } finally {
+  //     setSaveLoading(false);
+  //   }
+  // };
+
 
   if (!post) return <div className="loading">Loading...</div>;
 return (
@@ -320,6 +372,14 @@ return (
           >
             👎 {dislikes}
           </button>
+                    {/* <button
+            onClick={handleSave}
+            disabled={saveLoading}
+            className={`post-save-btn ${isSaved ? 'saved' : ''}`}
+          >
+            {saveLoading ? '...' : isSaved ? 'Saved' : 'Save'}
+          </button> */}
+
         </div>
 
         <div className="post-uploader">

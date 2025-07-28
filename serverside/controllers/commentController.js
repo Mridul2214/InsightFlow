@@ -27,7 +27,7 @@ export const createComment = async (req, res) => {
     });
 
     await newComment.save();
-    
+
     // Populate user data before sending response
     const populatedComment = await Comment.findById(newComment._id)
       .populate('user', 'username');

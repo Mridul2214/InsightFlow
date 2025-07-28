@@ -11,7 +11,8 @@ export default function SearchResults() {
   const navigate = useNavigate();
   const [results, setResults] = useState([]);
   const [query, setQuery] = useState('');
-  
+
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const q = params.get('q');
@@ -23,13 +24,21 @@ export default function SearchResults() {
       .catch(err => console.error('Search failed:', err));
   }, [location.search]);
 
+  const handleClick = (url) => {
+    localStorage.setItem('searchQuery', '');
+    window.dispatchEvent(new Event("storage")); // Notifies MainLayout
+    navigate(url);
+  };
+
+
+
   const renderItem = (item) => {
     const uploader = item.userId?.username || 'Anonymous';
     const timestamp = new Date(item.createdAt || item.timestamp).toLocaleString();
 
     if (item.contentType === 'video') {
       return (
-        <div className="result-card video" onClick={() => navigate(`/videos/${item._id}`)}>
+        <div className="result-card video" onClick={() => handleClick(`/videos/${item._id}`)}>
           <video src={`${BASE_URL}/uploads/${item.videoUrl}`} controls muted className="result-thumb" />
           <div className="result-info">
             <h3>{item.title}</h3>
@@ -40,7 +49,7 @@ export default function SearchResults() {
       );
     } else if (item.contentType === 'post') {
       return (
-        <div className="result-card post" onClick={() => navigate(`/posts/${item._id}`)}>
+        <div className="result-card post" onClick={() => handleClick(`/posts/${item._id}`)}>
           <img src={`${BASE_URL}/uploads/${item.image}`} alt="Post" className="result-thumb" />
           <div className="result-info">
             <h3>{item.title}</h3>
@@ -51,7 +60,7 @@ export default function SearchResults() {
       );
     } else if (item.contentType === 'blog') {
       return (
-        <div className="result-card blog" onClick={() => navigate(`/blogs/${item._id}`)}>
+        <div className="result-card blog" onClick={() => handleClick(`/blogs/${item._id}`)}>
           <div className="result-info only-text">
             <h3>{item.title}</h3>
             <p>{item.content?.slice(0, 150)}...</p>

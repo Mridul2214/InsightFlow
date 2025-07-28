@@ -141,7 +141,7 @@ const Subscription = () => {
               </div>
             </div>
             
-            <button className="close-btn" onClick={() => setShowPaymentOptions(false)}>
+            <button className="close-btnn" onClick={() => setShowPaymentOptions(false)}>
               Cancel
             </button>
           </div>
