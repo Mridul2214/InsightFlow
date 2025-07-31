@@ -398,3 +398,22 @@ export const getLikedContentByUserId = async (req, res) => {
     });
   }
 };
+
+
+// export const getCurrentUserprofile = async (req, res) => {
+//   try {
+//     const user = req.user; // populated by protect middleware
+//     if (!user) {
+//       return res.status(401).json({ message: 'Unauthorized' });
+//     }
+//     res.json({
+//       _id: user._id,
+//       username: user.username,
+//       email: user.email,
+//       isBanned: user.isBanned,
+//       // add more fields as needed
+//     });
+//   } catch (err) {
+//     res.status(500).json({ message: 'Server error' });
+//   }
+// };

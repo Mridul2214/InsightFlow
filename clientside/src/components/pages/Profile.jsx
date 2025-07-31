@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../css/profile.css';
-import { FaSignOutAlt,FaEdit } from 'react-icons/fa';
+import { FaSignOutAlt, FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -24,16 +24,16 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-const userData = JSON.parse(localStorage.getItem('user'));
-if (!userData) return navigate('/login');
+    const userData = JSON.parse(localStorage.getItem('user'));
+    if (!userData) return navigate('/login');
 
-const userId = userData._id || userData.id;
-if (!userId) {
-  console.error("❌ User ID not found in localStorage object:", userData);
-  return navigate('/login');
-}
+    const userId = userData._id || userData.id;
+    if (!userId) {
+      console.error("❌ User ID not found in localStorage object:", userData);
+      return navigate('/login');
+    }
 
-setUser(prev => ({ ...prev, ...userData, id: userId }));
+    setUser(prev => ({ ...prev, ...userData, id: userId }));
 
 
     const fetchData = async () => {
@@ -47,16 +47,16 @@ setUser(prev => ({ ...prev, ...userData, id: userId }));
           axios.get(`${BASE_URL}/api/blogs/user/${userData._id}`, config),
           // axios.get(`${BASE_URL}/api/users/followers/count/${userData._id}`, config),
         ]);
-            try { 
-      const followersRes = await axios.get(
-        `${BASE_URL}/api/follow/count/${userData._id}`,
-        config
-      );
-      setFollowersCount(followersRes.data.count);
-    } catch (followErr) {
-      console.error('Followers count error:', followErr);
-      setFollowersCount(0); // Default value
-    }
+        try {
+          const followersRes = await axios.get(
+            `${BASE_URL}/api/follow/count/${userData._id}`,
+            config
+          );
+          setFollowersCount(followersRes.data.count);
+        } catch (followErr) {
+          console.error('Followers count error:', followErr);
+          setFollowersCount(0); // Default value
+        }
         setUserPosts(posts.data);
         setUserVideos(videos.data);
         setUserBlogs(blogs.data);
@@ -120,10 +120,11 @@ setUser(prev => ({ ...prev, ...userData, id: userId }));
               />
               <div className="card-details">
                 <h4>{p.title}</h4>
-                <p>{p.description}</p>
+                <p>{p.description?.substring(0, 60)}</p>
+
                 <button className="delete-btn" onClick={() => handleDelete('post', p._id)}>Delete</button>
               </div>
-                            <button 
+              <button
                 className="edit-btn"
                 onClick={() => navigate(`/edit-post/${p._id}`)}
               >
@@ -157,6 +158,12 @@ setUser(prev => ({ ...prev, ...userData, id: userId }));
                 <h4>{v.title}</h4>
                 <button className="delete-btn" onClick={() => handleDelete('video', v._id)}>Delete</button>
               </div>
+              <button
+                className="edit-btn"
+                onClick={() => navigate(`/edit-video/${v._id}`)}
+              >
+                <FaEdit /> Edit
+              </button>
             </div>
           ))}
         </div>
@@ -173,12 +180,12 @@ setUser(prev => ({ ...prev, ...userData, id: userId }));
                 <h4>{b.title}</h4>
                 <p>{b.content?.slice(0, 150) + '...'}</p>
                 <button className="delete-btn" onClick={() => handleDelete('blog', b._id)}>Delete</button>
-                                            <button 
-                className="edit-btn"
-                onClick={() => navigate(`/edit-blog/${b._id}`)}
-              >
-                <FaEdit /> Edit
-              </button>
+                <button
+                  className="edit-btn"
+                  onClick={() => navigate(`/edit-blog/${b._id}`)}
+                >
+                  <FaEdit /> Edit
+                </button>
               </div>
             </div>
           ))}
@@ -192,21 +199,21 @@ setUser(prev => ({ ...prev, ...userData, id: userId }));
   return (
     <div className="profile-container">
       <div className="profile-header">
-<img
-  src={
-    user.profilePic
-      ? user.profilePic.includes('http') 
-        ? user.profilePic 
-        : `${BASE_URL}/uploads/profilePics/${user.profilePic}`
-      : '/default-profile.png'
-  }
-  alt="Profile"
-  className="profile-pic"
-  onError={(e) => {
-    e.target.onerror = null;
-    e.target.src = '/default-profile.png';
-  }}
-/>
+        <img
+          src={
+            user.profilePic
+              ? user.profilePic.includes('http')
+                ? user.profilePic
+                : `${BASE_URL}/uploads/profilePics/${user.profilePic}`
+              : '/default-profile.png'
+          }
+          alt="Profile"
+          className="profile-pic"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/default-profile.png';
+          }}
+        />
 
         <div className="user-details">
           <div className="user-main-info">
@@ -218,9 +225,9 @@ setUser(prev => ({ ...prev, ...userData, id: userId }));
             {user.bio || "This user hasn't added a bio yet."}
           </p>
           <div className="profile-stats">
-            <span><b>{userPosts.length}</b> Posts</span>
-            <span><b>{userVideos.length}</b> Videos</span>
-            <span><b>{userBlogs.length}</b> Blogs</span>
+            <span className='post-btn'><b>{userPosts.length}</b> Posts</span>
+            <span className='video-btn'><b>{userVideos.length}</b> Videos</span>
+            <span className='blog-btn'><b>{userBlogs.length}</b> Blogs</span>
             <span><b>{followersCount}</b> Followers</span>
           </div>
           <div className="profile-actions">

@@ -12,11 +12,11 @@ const userSchema = new mongoose.Schema({
   profilePic: { type: String },
   isBanned: { type: Boolean, default: false },
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 }, { timestamps: true });
 
 
-userSchema.methods.comparePassword = async function(candidatePassword) {
+userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
 

@@ -1,12 +1,35 @@
+
+:root {
+  /* --bg-color: #a62020; */
+  --text-color: #1e1e1e;
+  --highlight-color: #0284c7;
+  --card-bg: #f2f2f2;
+  --hover-bg: #e0e0e0;
+  --subtext-color: #d4cfcf;
+}
+
+/* Dark Theme Variables */
+[data-theme='dark'] {
+  --bg-color: #0f172a;
+  --text-color: #ffffff;
+  --highlight-color: #22d3ee;
+  --card-bg: #1e1e1e;
+  --hover-bg: #2a2a2a;
+  --subtext-color: #bcbcbc;
+}
+
 .search-page {
   padding: 2rem;
-  color: #fff;
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
 
+/* Highlight Text */
 .query-highlight {
-  color: #22d3ee;
+  color: var(--highlight-color);
 }
 
+/* Result Container Layout */
 .results-container {
   display: flex;
   flex-direction: column;
@@ -14,10 +37,11 @@
   margin-top: 1rem;
 }
 
+/* Individual Result Card */
 .result-card {
   display: flex;
   gap: 1rem;
-  /* background: #1e1e1e; */
+  background: var(--card-bg);
   padding: 1rem;
   border-radius: 12px;
   cursor: pointer;
@@ -25,9 +49,10 @@
 }
 
 .result-card:hover {
-  background: #e9e4e4;
+  background: var(--hover-bg);
 }
 
+/* Thumbnail Image */
 .result-thumb {
   width: 200px;
   height: 120px;
@@ -35,6 +60,7 @@
   border-radius: 8px;
 }
 
+/* Result Info Section */
 .result-info {
   flex: 1;
 }
@@ -42,17 +68,17 @@
 .result-info h3 {
   margin: 0;
   font-size: 1.2rem;
-  /* color: #e2e8f0; */
+  color: var(--text-color);
 }
 
 .result-info p {
   margin: 0.3rem 0;
-  color: black;
+  color: var(--text-color);
 }
 
 .result-info span {
   font-size: 0.9rem;
-  color: black;
+  color: var(--subtext-color);
 }
 
 .result-info.only-text {

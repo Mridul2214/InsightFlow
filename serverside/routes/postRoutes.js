@@ -4,7 +4,7 @@ import {
   createPost,
   uploadMiddleware,
   getPostsByUser,
-  getAllPost,getPostById,
+  getAllPost, getPostById,
   deletePost,
   updatePost
 } from '../controllers/postController.js';
@@ -17,10 +17,9 @@ router.post('/upload', protect, uploadMiddleware, createPost);
 // GET /api/posts/user/:id
 router.get('/user/:id', getPostsByUser);
 
-// ✅ FIXED: GET /api/posts/all
 router.get('/all', getAllPost);
 router.get('/:id', getPostById);
-router.delete('/:id',protect,deletePost)
+router.delete('/:id', protect, deletePost)
 
 
 // routes/post.js
@@ -39,12 +38,6 @@ router.get('/', async (req, res) => {
 // In your backend routes (likely routes/posts.js)
 router.put('/:id', protect, uploadMiddleware, updatePost);
 
-// router.post('/posts',
-//   auth.verifyToken,      // First verify token
-//   checkUserBanStatus,    // Then check ban status
-//   uploadBlog.single('file'),  // Then handle upload
-//   blogController.createBlog
-// );
 
 
 export default router;

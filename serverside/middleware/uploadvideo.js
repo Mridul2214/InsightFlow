@@ -37,23 +37,3 @@ const uploadVideo = multer({
 });
 
 export default uploadVideo;
-
-
-
-// exports.checkUserBanStatus = async (req, res, next) => {
-//   try {
-//     const user = await User.findById(req.user.id);
-//     if (user.isBanned) {
-//       return res.status(403).json({ 
-//         success: false,
-//         error: 'Your account is banned from uploading content' 
-//       });
-//     }
-//     next();
-//   } catch (err) {
-//     res.status(500).json({ 
-//       success: false,
-//       error: 'Failed to verify account status' 
-//     });
-//   }
-// };

@@ -19,7 +19,7 @@ try {
   }
 } catch (error) {
   console.error("Failed to initialize GoogleGenerativeAI:", error);
- 
+
 }
 
 
@@ -68,10 +68,10 @@ export const summarizeText = async (req, res) => {
         details: error.message || 'An error occurred while communicating with the Gemini API.'
       });
     } else if (error.message && error.message.includes('API key not valid')) {
-       return res.status(401).json({
-           error: 'Invalid API Key',
-           details: 'Please check your GEMINI_API_KEY in the .env file or environment variables.'
-       });
+      return res.status(401).json({
+        error: 'Invalid API Key',
+        details: 'Please check your GEMINI_API_KEY in the .env file or environment variables.'
+      });
     } else {
       // General server error
       res.status(500).json({

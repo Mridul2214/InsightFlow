@@ -81,33 +81,6 @@ export const getBlogById = async (req, res) => {
 };
 
 
-// import mongoose from 'mongoose';
-
-
-// export const getBlogById = async (req, res) => {
-//   try {
-//     // Validate ID format
-//     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-//       return res.status(400).json({ message: 'Invalid blog ID format' });
-//     }
-
-//     const blog = await Blog.findById(req.params.id)
-//       .populate('userId', 'username profilePicture')
-//       .populate('likes', 'username profilePicture')
-//       .populate('dislikes', 'username profilePicture');
-
-//     if (!blog) {
-//       return res.status(404).json({ message: 'Blog not found' });
-//     }
-
-//     res.json(blog);
-//   } catch (err) {
-//     console.error('Error fetching blog:', err);
-//     res.status(500).json({ message: 'Failed to fetch blog' });
-//   }
-// };
-
-
 
 export const toggleReaction = async (req, res) => {
   try {

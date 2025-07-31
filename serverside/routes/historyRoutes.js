@@ -11,14 +11,14 @@ router.use(protect);
 router.post('/', async (req, res) => {
   try {
     const { contentId, contentType, title } = req.body;
-    
+
     const historyItem = new History({
       user: req.user._id,  // Using the authenticated user's ID
       contentId,
       contentType,
       title
     });
-    
+
     await historyItem.save();
     res.status(201).json(historyItem);
   } catch (error) {
@@ -53,7 +53,7 @@ router.delete('/:id', async (req, res) => {
       _id: req.params.id,
       user: req.user._id  // Ensure user can only delete their own items
     });
-    
+
     if (!item) return res.status(404).json({ message: 'Item not found' });
     res.json({ message: 'Item removed successfully' });
   } catch (error) {

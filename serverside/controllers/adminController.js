@@ -39,9 +39,9 @@ export const getAllUsers = async (req, res) => {
       data: users // Direct array of users
     });
   } catch (error) {
-    res.status(500).json({ 
-      success: false, 
-      error: error.message 
+    res.status(500).json({
+      success: false,
+      error: error.message
     });
   }
 };
@@ -137,7 +137,7 @@ export const manageContent = async (req, res) => {
 export const banUser = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { action } = req.body; 
+    const { action } = req.body;
 
     const user = await User.findByIdAndUpdate(
       userId,
@@ -160,7 +160,7 @@ export const banUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
-};  
+};
 
 
 
@@ -191,9 +191,9 @@ export const adminLogin = async (req, res) => {
       });
     }
 
-const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, {
-  expiresIn: '1d',
-});
+    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, {
+      expiresIn: '1d',
+    });
 
 
     res.cookie('adminToken', token, {

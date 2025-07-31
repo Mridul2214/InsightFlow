@@ -1,37 +1,38 @@
 /* Variables for theming */
 :root {
-  --background-color-light: #f9f9f9;
-  --text-color-light: #333;
-  --navbar-bg-light: #fff;
-  --border-color-light: #ddd;
-  --sidebar-bg-light: #fff;
-  --hover-bg-light: #f0f0f0;
-  --active-bg-light: #e0e0e0;
-  --button-bg-light: #007bff;
-  --button-text-light: #fff;
-  --search-bg-light: #eee;
+  --background-color-light: #ffffff;
+  --text-color-light: #0f0f0f;
+  --navbar-bg-light: #f8f8f8;
+  --border-color-light: #e5e5e5;
+  --sidebar-bg-light: #ffffff;
+  --hover-bg-light: #f1f1f1;
+  --active-bg-light: #e5e5e5;
+  --button-bg-light: #3ea6ff;
+  --button-text-light: #ffffff;
+  --search-bg-light: #f1f1f1;
   --search-border-light: #ccc;
-  --dropdown-bg-light: #fff;
-  --dropdown-border-light: #ddd;
+  --dropdown-bg-light: #ffffff;
+  --dropdown-border-light: #e5e5e5;
   --dropdown-hover-light: #f0f0f0;
 }
 
 .dark-theme {
-  --background-color: #1a1a1a;
-  --text-color: #f0f0f0;
-  --navbar-bg: #282828;
-  --border-color: #444;
-  --sidebar-bg: #282828;
-  --hover-bg: #3a3a3a;
-  --active-bg: #4a4a4a;
-  --button-bg: #0056b3;
-  --button-text: #fff;
-  --search-bg: #333;
-  --search-border: #555;
-  --dropdown-bg: #282828;
-  --dropdown-border: #444;
-  --dropdown-hover: #3a3a3a;
+  --background-color: #0d0d0d;           /* Deep black background */
+  --text-color: #e0e0e0;                 /* Light gray text */
+  --navbar-bg: #121212;                  /* Almost black navbar */
+  --border-color: #1f1f1f;               /* Soft dark border */
+  --sidebar-bg: #121212;                 /* Match navbar */
+  --hover-bg: #1a1a1a;                   /* Slightly lighter hover */
+  --active-bg: #1e1e1e;                  /* Slightly more visible active state */
+  --button-bg: #1e40af;                  /* Vivid blue */
+  --button-text: #ffffff;
+  --search-bg: #1a1a1a;
+  --search-border: #333;
+  --dropdown-bg: #121212;
+  --dropdown-border: #1f1f1f;
+  --dropdown-hover: #1a1a1a;
 }
+
 
 .light-theme {
   --background-color: var(--background-color-light);
@@ -124,6 +125,29 @@ body {
   color: var(--text-color);
   font-size: 16px;
   outline: none;
+}
+.main-navbar .clear-bt {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-navbar .clear-bt:hover {
+  color: #d32f2f;
+}
+
+.main-navbar .search-bar {
+  position: relative; /* Needed for the clear-btn absolute position */
 }
 
 .main-navbar .search-input::placeholder {
@@ -458,3 +482,4 @@ input:checked + .slider:before {
     display: none; /* Hide separators in horizontal sidebar */
   }
 }
+

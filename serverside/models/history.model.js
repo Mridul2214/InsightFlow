@@ -13,7 +13,7 @@ const historySchema = new mongoose.Schema({
   contentType: {
     type: String,
     required: true,
-    enum: ['video','post','blog']
+    enum: ['video', 'post', 'blog']
   },
   title: {
     type: String,

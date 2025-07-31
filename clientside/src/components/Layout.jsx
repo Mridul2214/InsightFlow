@@ -8,15 +8,22 @@ import {
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function MainLayout({ children }) {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme === 'dark';
+  });
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const toggleTheme = () => setDarkMode(!darkMode);
   const [activeFilter, setActiveFilter] = useState('');
   const location = useLocation();
-const [query, setQuery] = useState('');
+  const [query, setQuery] = useState('');
+  useEffect(() => {
+    const stored = localStorage.getItem('searchQuery') || '';
+    setQuery(stored);
+  }, []);
 
-    // const { currentUser } = useAuth(); // Get current user from your auth context
+
+  // const { currentUser } = useAuth(); // Get current user from your auth context
 
   // const handleClick = () => {
   //   if (!currentUser) {
@@ -33,15 +40,15 @@ const [query, setQuery] = useState('');
   useEffect(() => {
     const path = location.pathname;
     const searchParams = new URLSearchParams(location.search);
-    
+
     if (path === '/posts') {
       setActiveFilter('posts');
     } else if (path === '/videos') {
       setActiveFilter('videos');
     } else if (path === '/blogs') {
       setActiveFilter('blogs');
-    // } else if (searchParams.get('sort') === 'popular') {
-    //   setActiveFilter('popular');
+      // } else if (searchParams.get('sort') === 'popular') {
+      //   setActiveFilter('popular');
     } else if (searchParams.get('sort') === 'recent') {
       setActiveFilter('recent');
     } else if (searchParams.get('sort') === 'trending') {
@@ -54,9 +61,9 @@ const [query, setQuery] = useState('');
   const login = () => { navigate('/login'); };
   const profile = () => { navigate('/profile'); };
   const post = () => { navigate('/createpost'); };
-  const home = () => { 
+  const home = () => {
     setActiveFilter('');
-    navigate('/'); 
+    navigate('/');
   };
   const video = () => { navigate('/createvideo'); };
   const createBlog = () => { navigate('/createblog'); };
@@ -110,38 +117,78 @@ const [query, setQuery] = useState('');
     }
   };
 
-useEffect(() => {
-  const delayDebounce = setTimeout(() => {
-    if (query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
-    }
-  }, 300); // debounce to avoid firing too fast on every keystroke
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      const allowedPaths = ['/', '/search'];
+      if (query.trim() && allowedPaths.includes(location.pathname)) {
+        navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+      }
 
-  return () => clearTimeout(delayDebounce);
-}, [query, navigate]);
+      if (!query.trim() && location.pathname.startsWith('/search')) {
+        navigate('/');
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounce);
+  }, [query, navigate, location.pathname]);
+
+  // Sync with localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem('searchQuery') || '';
+    if (location.pathname.startsWith('/search')) {
+      setQuery(stored);
+    } else {
+      setQuery('');
+      localStorage.removeItem('searchQuery');
+    }
+  }, [location.pathname]);
+
+  // Handle clear button
+  const handleClear = () => {
+    setQuery('');
+    navigate('/');
+  };
+
+
+  const toggleTheme = () => {
+    const newTheme = !darkMode;
+    setDarkMode(newTheme);
+    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+    document.body.classList.remove('dark-theme', 'light-theme');
+    document.body.classList.add(newTheme ? 'dark-theme' : 'light-theme');
+  };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.body.classList.add(savedTheme === 'dark' ? 'dark-theme' : 'light-theme');
+  }, []);
 
 
   return (
     <div className={darkMode ? 'dark-theme' : 'light-theme'}>
       <nav className="main-navbar">
         <button className="logo" onClick={home}>
-          <FaYoutube style={{ marginRight: '6px' }} /> 
+          <FaYoutube style={{ marginRight: '6px' }} />
           <span className="logo-text">InsightFlow</span>
         </button>
 
-    <div className="search-bar">
-<input
-  type="text"
-  className="search-input"
-  placeholder="Search 🔍"
-  value={query}
-  onChange={(e) => setQuery(e.target.value)}
-/>
-
-      {/* <button className="search-btn" onClick={handleSearch}>
-        🔍
-      </button> */}
-    </div>
+        <div className="search-bar">
+          <input
+            type="text"
+            className="search-input"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              localStorage.setItem('searchQuery', e.target.value);
+            }}
+            placeholder="Search 🔍"
+          />
+          {query && (
+            <button className="clear-bt" onClick={handleClear} title="Clear" >
+              &times;
+            </button>
+          )}
+        </div>
 
         <div className="nav-right">
           {/* <button className="nav-btn create-btn" onClick={login}>
@@ -184,8 +231,8 @@ useEffect(() => {
                 <FaPen /> Blogs
               </button>
               <hr />
-              <button 
-                onClick={() => handleFilterChange('recent')} 
+              <button
+                onClick={() => handleFilterChange('recent')}
                 className={location.search.includes('recent') ? 'activeFilter' : ''}
               >
                 Recent
@@ -204,7 +251,7 @@ useEffect(() => {
       <div className="main-container">
         <aside className="main-sidebar">
           <button onClick={home}><FaHome /> <span>Home</span></button>
-{/* <button 
+          {/* <button 
   onClick={() => handleFilterChange('trending')}
   className={location.search.includes('trending') ? 'activeFilter' : ''}
 >
@@ -214,17 +261,17 @@ useEffect(() => {
           <hr />
           {/* <button><FaRegListAlt /> <span>Library</span></button> */}
 
-<button onClick={() => navigate('/history')}>
-  <FaHistory /> <span>History</span>
-</button>
-<button onClick={() => navigate('/your-content')}>
-  <FaPlayCircle /> <span>Your Content</span>
-</button>
-{/* <button onClick={() => navigate(`/users/${currentUserId}/liked-content`)}>
+          <button onClick={() => navigate('/history')}>
+            <FaHistory /> <span>History</span>
+          </button>
+          <button onClick={() => navigate('/your-content')}>
+            <FaPlayCircle /> <span>Your Content</span>
+          </button>
+          {/* <button onClick={() => navigate(`/users/${currentUserId}/liked-content`)}>
   <FaThumbsUp /> 
   <span>Liked contents</span>
 </button>         */}
-  <hr />
+          <hr />
           <button onClick={post}><FaImage /> <span>Create Post</span></button>
           <button onClick={video}><FaVideo /> <span>Create Video</span></button>
           <button onClick={createBlog}><FaPen /> <span>Create Blog</span></button>
@@ -232,7 +279,7 @@ useEffect(() => {
           <button onClick={contact}><FaPhone /> <span>Contact</span></button>
           <button onClick={about}><FaInfoCircle /> <span>About</span></button>
           <hr />
-          <button onClick={()=> navigate('/subcription')}><FaYoutube /> <span>Subscriptions</span></button>
+          <button onClick={() => navigate('/subcription')}><FaYoutube /> <span>Subscriptions</span></button>
         </aside>
 
         <main className="main-content">{children}</main>

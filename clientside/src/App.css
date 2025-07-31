@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --accent: #007bff;
   --accent-hover: #0056b3;
   --text: #000000;
@@ -10,7 +10,7 @@
   --accent-hover: #c0392b;
   --text: #ffffff;
   --border: #444;
-}
+} */
 
 /* :root {
   --text: #fff;
@@ -18,8 +18,7 @@
   --accent-hover: #e04444;
   --border: #ccc;
 } */
-:root {
-  /* ... other variables ... */
-  --sidebar-width: 100px; /* ⬅️ Reduced from 240px to 180px */
-  --sidebar-collapsed-width: 72px;
-}
+/* :root {
+  --sidebar-width: 100px; 
+    --sidebar-collapsed-width: 72px;
+} */
