@@ -5,22 +5,17 @@ import {
   checkFollowStatus,
   getUserPosts,
   getUserVideos,
-  getUserBlogs, getLikedContentByUserId,
+  getUserBlogs, getLikedContentByUserId, getCurrentUserprofile,
 } from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
-// import Reaction from '../models/reaction.model.js';
 import fs from 'fs';
 import multer from 'multer'
-// import User from '../models/user.model.js' 
+
 
 const router = express.Router();
 
-
-
 router.get('/:id', getUserProfile);
-// router.post('/follow', protect, followUser);
 router.get('/followers/count/:userId', getFollowerCount);
-
 
 
 const profileDir = 'uploads/profilePics';
@@ -44,6 +39,7 @@ router.get('/is-following/:userId', protect, checkFollowStatus);
 router.get('/:id/posts', getUserPosts);
 router.get('/:id/videos', getUserVideos);
 router.get('/:id/blogs', getUserBlogs);
+router.get('/me', protect, getCurrentUserprofile);
 
 
 router.get('/:userId', async (req, res) => {

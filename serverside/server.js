@@ -14,6 +14,7 @@ import reactionRoutes from './routes/reactionRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import historyRoutes from './routes/historyRoutes.js'
 import searchRoutes from './routes/searchRoutes.js'
+import likedContentRoutes from "./routes/likedContentRoutes.js"
 import { fileURLToPath } from 'url';
 import path from 'path';
 
@@ -51,26 +52,8 @@ app.use('/api/comments', commentsRoutes)
 app.use('/api/admin', adminRoutes);
 app.use('/api/history', historyRoutes)
 app.use('/api/search', searchRoutes);
+app.use('/api/likedcontent',likedContentRoutes);
 
-// ❌ Removed YouTube support
-// app.get('/api/youtube/search', async (req, res) => {
-//   try {
-//     const { q } = req.query;
-//     const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-//       params: {
-//         part: 'snippet',
-//         maxResults: 30,
-//         q: q || 'react js',
-//         key: process.env.YOUTUBE_API_KEY, // Also remove from .env if no longer needed
-//       },
-//     });
-
-//     res.json(response.data);
-//   } catch (error) {
-//     console.error('YouTube API Error:', error.response?.data || error.message);
-//     res.status(500).json({ error: 'Failed to fetch YouTube videos' });
-//   }
-// });
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);

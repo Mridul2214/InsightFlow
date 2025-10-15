@@ -4,6 +4,7 @@ import '../css/home.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaHistory } from 'react-icons/fa';
 import HistorySidebar from '../pages/HistorySidebar';
+import BannedUser from '../BannedUser';
 
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
   const [loadingIndex, setLoadingIndex] = useState(null);
   const [expandedIndex, setExpandedIndex] = useState(null);
   const [viewHistory, setViewHistory] = useState([]);
+  const [isBanned, setIsBanned] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,7 +25,27 @@ export default function Home() {
       setViewHistory(JSON.parse(savedHistory));
     }
     fetchAll();
+    checkBanStatus();
   }, []);
+
+  const checkBanStatus = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    try {
+      const res = await axios.get('http://localhost:3000/api/user/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.data.isBanned) {
+        setIsBanned(true);
+      }
+    } catch (err) {
+      console.error('Failed to check ban status:', err);
+    }
+  };
 
   async function fetchAll() {
     try {
@@ -244,6 +266,8 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {isBanned && <BannedUser />}
     </div>
   );
 }

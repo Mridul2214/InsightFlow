@@ -57,6 +57,10 @@ export const getFollowerCount = async (req, res) => {
 // Check follow status
 export const getFollowStatus = async (req, res) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.userId)) {
+      return res.status(400).json({ error: "Invalid user ID format" });
+    }
+
     const exists = await Follow.exists({
       follower: req.user._id,
       following: req.params.userId

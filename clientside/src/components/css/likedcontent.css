@@ -1,106 +1,281 @@
-/* LikedContent.css */
-.liked-content-container {
+/* === Theme Variables === */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #24292e;
+  --subtext-color: #586069;
+  --muted-bg: #f6f8fa;
+  --border-color: #e1e4e8;
+  --highlight-border: #c8e1ff;
+  --accent-color: #0366d6;
+  --card-bg: #ffffff;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-theme {
+  --bg-color: #0d0d0d;
+  --text-color: #e0e0e0;
+  --subtext-color: #aaaaaa;
+  --muted-bg: #1a1a1a;
+  --border-color: #1f1f1f;
+  --highlight-border: #1e40af;
+  --accent-color: #3ea6ff;
+  --card-bg: #1e1e1e;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* === Main Layout === */
+.liked-content-page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
 }
 
-.liked-content-container h1 {
+.page-header {
   text-align: center;
-  margin-bottom: 30px;
-  color: #333;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.tabs {
+.page-header h1 {
+  font-size: 2rem;
+  color: var(--text-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.total-count {
+  color: var(--subtext-color);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* === Content Tabs === */
+.content-tabs {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
-  gap: 10px;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
-.tab-button {
-  padding: 10px 20px;
-  background: #f0f0f0;
-  border: none;
-  border-radius: 5px;
+.content-tabs button {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-.tab-button:hover {
-  background: #ddd;
+.content-tabs button:hover {
+  background: var(--muted-bg);
+  border-color: var(--accent-color);
 }
 
-.tab-button.active {
-  background: #007bff;
+.content-tabs button.active {
+  background: var(--accent-color);
   color: white;
+  border-color: var(--accent-color);
+}
+
+/* === Content Grid === */
+.content-section {
+  margin-top: 1rem;
 }
 
 .content-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
 .content-card {
-  background: white;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--card-shadow);
 }
 
 .content-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+  box-shadow: var(--hover-shadow);
+  border-color: var(--highlight-border);
 }
 
-.content-image {
+/* === Card Media === */
+.card-media {
+  position: relative;
   width: 100%;
   height: 180px;
+  overflow: hidden;
+  background: var(--muted-bg);
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-.content-details {
-  padding: 15px;
+.content-card:hover .card-media img {
+  transform: scale(1.05);
 }
 
-.content-details h3 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-  color: #333;
+.no-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--muted-bg);
+  font-size: 3rem;
 }
 
-.content-details .excerpt {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 10px;
+/* === Card Content === */
+.card-content {
+  padding: 1rem;
 }
 
-.content-details .date {
-  color: #999;
-  font-size: 12px;
-  margin: 0;
+.card-content h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.loading-spinner {
+.card-content p {
+  margin: 0 0 1rem 0;
+  color: var(--subtext-color);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* === Card Meta === */
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.content-type {
+  background: var(--accent-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.date {
+  color: var(--subtext-color);
+  font-size: 0.8rem;
+}
+
+/* === States === */
+.loading, .error {
   text-align: center;
-  padding: 50px;
-  font-size: 18px;
+  padding: 3rem;
+  font-size: 1.1rem;
 }
 
-.error-message {
-  color: #d32f2f;
-  background: #ffebee;
-  padding: 15px;
-  border-radius: 5px;
-  text-align: center;
-  margin: 20px;
+.loading {
+  color: var(--text-color);
+}
+
+.error {
+  color: #d73a49;
+  background: var(--muted-bg);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
 }
 
 .no-content {
   text-align: center;
-  padding: 30px;
-  color: #666;
-  grid-column: 1 / -1;
+  padding: 3rem;
+  background: var(--muted-bg);
+  border-radius: 6px;
+  border: 1px dashed var(--border-color);
+}
+
+.no-content p {
+  color: var(--subtext-color);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+  .liked-content-page {
+    padding: 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .content-tabs {
+    gap: 0.5rem;
+  }
+
+  .content-tabs button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .content-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .card-media {
+    height: 150px;
+  }
+
+  .card-content {
+    padding: 0.75rem;
+  }
+
+  .card-content h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .content-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .content-tabs button {
+    width: 100%;
+    max-width: 200px;
+  }
 }

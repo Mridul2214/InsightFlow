@@ -16,20 +16,20 @@
   --modal-content-bg: white;
 }
 
-[data-theme='dark'] {
-  --bg-color: #121212;
-  --text-color: #f0f0f0;
+body.dark-theme {
+  --bg-color: #0d0d0d;
+  --text-color: #e0e0e0;
   --heading-color: #ffffff;
-  --subtext-color: #b0b0b0;
+  --subtext-color: #aaaaaa;
   --card-bg: #1e1e1e;
   --card-shadow: rgba(255, 255, 255, 0.05);
-  --popular-border: #4dabf7;
-  --selected-border: #38d9a9;
-  --btn-bg: #3498db;
-  --btn-hover: #2980b9;
+  --popular-border: #3ea6ff;
+  --selected-border: #10b981;
+  --btn-bg: #3ea6ff;
+  --btn-hover: #1e40af;
   --faq-shadow: rgba(255, 255, 255, 0.05);
-  --modal-bg: rgba(255, 255, 255, 0.05);
-  --modal-content-bg: #2b2b2b;
+  --modal-bg: rgba(0, 0, 0, 0.7);
+  --modal-content-bg: #1e1e1e;
 }
 
 /* === Main Styles === */
@@ -133,7 +133,7 @@ h1 {
   border-bottom: 1px solid #eee;
 }
 
-[data-theme='dark'] .plan-features li {
+body.dark-theme .plan-features li {
   border-bottom: 1px solid #333;
 }
 

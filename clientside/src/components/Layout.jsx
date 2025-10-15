@@ -267,10 +267,14 @@ export default function MainLayout({ children }) {
           <button onClick={() => navigate('/your-content')}>
             <FaPlayCircle /> <span>Your Content</span>
           </button>
-          {/* <button onClick={() => navigate(`/users/${currentUserId}/liked-content`)}>
-  <FaThumbsUp /> 
-  <span>Liked contents</span>
-</button>         */}
+          <button onClick={() => {
+            const userData = JSON.parse(localStorage.getItem('user'));
+            if (userData && userData._id) {
+              navigate(`/users/${userData._id}/liked-content`);
+            }
+          }}>
+            <FaThumbsUp /> <span>Liked Content</span>
+          </button>
           <hr />
           <button onClick={post}><FaImage /> <span>Create Post</span></button>
           <button onClick={video}><FaVideo /> <span>Create Video</span></button>

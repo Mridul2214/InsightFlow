@@ -112,45 +112,7 @@ const handleReaction = async (reactionType) => {
   }
 };
 
-// Define BASE_URL properly at the top of your component
-
-useEffect(() => {
-  const fetchFollowData = async () => {
-    try {
-      if (!post?.userId?._id) return;
-      
-      console.log('Fetching follow data for:', post.userId._id);
-      
-      const countRes = await axios.get(
-        `${BASE_URL}/api/follow/count/${post.userId._id}`
-      );
-      console.log('Follow count response:', countRes.data);
-      
-      setFollowerCount(countRes.data.count);
-
-      if (user?._id) {
-        const statusRes = await axios.get(
-          `${BASE_URL}/api/follow/status/${post.userId._id}`,
-          { 
-            headers: { 
-              Authorization: `Bearer ${token}` 
-            } 
-          }
-        );
-        console.log('Follow status response:', statusRes.data);
-        setIsFollowing(statusRes.data.isFollowing);
-      }
-    } catch (err) {
-      console.error("API Error Details:", {
-        message: err.message,
-        response: err.response?.data,
-        status: err.response?.status
-      });
-    }
-  };
-  
-  fetchFollowData();
-}, [post?.userId?._id, user?._id, token]);
+// Follow data is now handled in fetchPostData above
 
 
 

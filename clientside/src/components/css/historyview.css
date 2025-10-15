@@ -16,21 +16,21 @@
   --spinner-top: #0366d6;
 }
 
-[data-theme='dark'] {
-  --bg-color: #121212;
-  --text-color: #e1e4e8;
-  --subtext-color: #999999;
-  --muted-bg: #1f1f1f;
-  --border-color: #333;
-  --highlight-border: #005cc5;
-  --accent-color: #58a6ff;
+body.dark-theme {
+  --bg-color: #0d0d0d;
+  --text-color: #e0e0e0;
+  --subtext-color: #aaaaaa;
+  --muted-bg: #1a1a1a;
+  --border-color: #1f1f1f;
+  --highlight-border: #1e40af;
+  --accent-color: #3ea6ff;
   --btn-bg: #d73a49;
   --btn-hover: #b31d28;
-  --back-btn-bg: #2c2c2c;
-  --back-btn-hover: #3a3a3a;
-  --item-type-bg: #002a4e;
-  --spinner-bg: #333;
-  --spinner-top: #58a6ff;
+  --back-btn-bg: #1e1e1e;
+  --back-btn-hover: #2a2a2a;
+  --item-type-bg: #1a1a1a;
+  --spinner-bg: #1f1f1f;
+  --spinner-top: #3ea6ff;
 }
 
 /* === History View Layout === */

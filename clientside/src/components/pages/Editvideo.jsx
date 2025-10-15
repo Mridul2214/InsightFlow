@@ -106,17 +106,17 @@ export default function EditVideo() {
           tag: Array.isArray(res.data.tag) ? res.data.tag.join(', ') : ''
         });
 
-        if (res.data.videoUrl) {
-          handleVideoState({ 
-            url: res.data.videoUrl, 
-            isLoading: true, 
-            hasError: false 
+        if (res.data.video) {
+          handleVideoState({
+            url: res.data.video,
+            isLoading: true,
+            hasError: false
           });
         } else {
-          handleVideoState({ 
-            url: null, 
-            isLoading: false, 
-            hasError: false 
+          handleVideoState({
+            url: null,
+            isLoading: false,
+            hasError: false
           });
         }
         
@@ -168,8 +168,7 @@ export default function EditVideo() {
         `${BASE_URL}/api/videos/${id}`,
         {
           title: formData.title,
-          tag: tagArray,
-          videoUrl: videoInfo.url
+          tag: tagArray
         },
         config
       );

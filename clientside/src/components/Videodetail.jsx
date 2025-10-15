@@ -115,34 +115,7 @@ setFollowerCount(followerRes.data.count);
     }
   };
 
-  useEffect(()=>{
-const fetchFollowData=async()=>{
-  try{
-    if(!video?.userId._id)return;
-    console.log('fetching follow data for:',video.userId._id);
-    const countRes= await axios.get(`${BASE_URL}/api/follow/count/${video.userId._id}`);
-    console.log('follow count response:' ,countRes.data);
-    setFollowerCount(countRes.data.count);
-    if (user?._id){
-      const statusRes=await axios.get(
-        `${BASE_URL}/api/follow/status/${video.userId.id}`,
-        {
-          headers:{Authorization:`Bearer ${token}`}
-        }
-      );
-      console.log('follow status response:',statusRes.data);
-      setIsFollowing(statusRes.data.isFollowing);
-    }
-  }catch (err) {
-      console.error("API Error Details:", {
-        message: err.message,
-        response: err.response?.data,
-        status: err.response?.status
-      });
-      }
-};
-fetchFollowData();
-  },[video?.userId?._id,user?._id,token]);
+// Follow data is now handled in fetchVideoData above
 
 
   const handleFollow = async () => {

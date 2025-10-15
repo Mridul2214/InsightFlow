@@ -92,10 +92,13 @@ export const generateTitleDescription = async (req, res) => {
 
     if (!genAI) {
       console.error('❌ Gemini client not initialized.');
-      return res.status(500).json({ error: 'Gemini client not initialized.' });
+      return res.status(503).json({
+        error: 'AI features are currently unavailable.',
+        details: 'The Gemini API key is not configured. Please contact the administrator to enable AI-powered features.'
+      });
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
     const prompt = `Write a creative and compelling 1–2 sentence description for a blog, video, or post titled "${title}". The description should be engaging and informative, like a summary teaser, without repeating the title or saying "this content is about." Just make it sound like a natural intro paragraph for a reader.`;
 
@@ -107,9 +110,9 @@ export const generateTitleDescription = async (req, res) => {
 
   } catch (error) {
     console.error('❌ Description Generation Error:', error);
-    res.status(500).json({
-      error: 'Failed to generate description.',
-      details: error.message || 'Unknown error occurred.',
+    res.status(503).json({
+      error: 'AI features are currently unavailable.',
+      details: 'The Gemini API key is not configured. Please contact the administrator to enable AI-powered features.',
     });
   }
 };
@@ -125,10 +128,13 @@ export const handleAITags = async (req, res) => {
 
     if (!genAI) {
       console.error('❌ Gemini client not initialized.');
-      return res.status(500).json({ error: 'Gemini client not initialized.' });
+      return res.status(503).json({
+        error: 'AI features are currently unavailable.',
+        details: 'The Gemini API key is not configured. Please contact the administrator to enable AI-powered features.'
+      });
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
     const prompt = `Based on the title "${title}", generate 5 relevant, popular social media hashtags (each starting with #). Format them as a comma-separated list. Only return the tags, no explanation.`;
 
@@ -141,9 +147,9 @@ export const handleAITags = async (req, res) => {
 
   } catch (error) {
     console.error('❌ Tag Generation Error:', error);
-    res.status(500).json({
-      error: 'Failed to generate tags.',
-      details: error.message || 'Unknown error occurred.',
+    res.status(503).json({
+      error: 'AI features are currently unavailable.',
+      details: 'The Gemini API key is not configured. Please contact the administrator to enable AI-powered features.',
     });
   }
 };

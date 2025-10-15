@@ -1,4 +1,4 @@
-import User from '../models/user.model.js';
+ import User from '../models/user.model.js';
 import Post from '../models/post.model.js';
 import Video from '../models/video.model.js';
 import Blog from '../models/blog.model.js';
@@ -6,81 +6,6 @@ import mongoose from 'mongoose';
 import Reaction from '../models/reaction.model.js';
 import path from 'path';
 import fs from 'fs'
-
-// export const getUserProfile = async (req, res) => {
-//   try {
-//     const userId = req.params.id;
-
-//     const user = await User.findById(userId).select('-password');
-//     const postCount = await Post.countDocuments({ userId });
-//     const videoCount = await Video.countDocuments({ userId });
-//     const blogCount = await Blog.countDocuments({ userId });
-
-//     if (!user) return res.status(404).json({ message: 'User not found' });
-
-//     res.status(200).json({
-//       user,
-//       stats: {
-//         posts: postCount,
-//         videos: videoCount,
-//         blogs: blogCount,
-//         followers: user.followers.length,
-//         following: user.following.length
-//       }
-//     });
-//   } catch (err) {
-//     res.status(500).json({ message: 'Failed to load profile', error: err.message });
-//   }
-// };
-
-
-
-
-// export const getUserProfile = async (req, res) => {
-//   try {
-//     const userId = req.params.id;
-
-//     // Find the user and exclude the password field
-//     const user = await User.findById(userId).select('-password');
-
-//     if (!user) {
-//       return res.status(404).json({ message: 'User not found' });
-//     }
-
-//     // Count uploaded content
-//     const [postCount, videoCount, blogCount] = await Promise.all([
-//       Post.countDocuments({ userId }),
-//       Video.countDocuments({ userId }),
-//       Blog.countDocuments({ userId })
-//     ]);
-
-//     res.status(200).json({
-//       user: {
-//         _id: user._id,
-//         name: user.name,
-//         username: user.username,
-//         email: user.email,
-//         bio: user.bio,
-//         profilePic: user.profilePic
-//           ? `http://localhost:3000/uploads/profilePics/${user.profilePic}`
-//           : '',
-//       },
-//       stats: {
-//         posts: postCount,
-//         videos: videoCount,
-//         blogs: blogCount,
-// followers: Array.isArray(user.followers) ? user.followers.length : 0,
-// following: Array.isArray(user.following) ? user.following.length : 0
-
-//       }
-//     });
-//   } catch (err) {
-//     res.status(500).json({ message: 'Failed to load profile', error: err.message });
-//   }
-// };
-
-
-
 
 export const getUserProfile = async (req, res) => {
   try {
@@ -188,47 +113,6 @@ export const getUserBlogs = async (req, res) => {
   }
 };
 
-
-
-
-
-
-// export const followUser = async (req, res) => {
-//   const { targetUserId } = req.body;
-//   const currentUserId = req.user.id;
-
-//   if (targetUserId === currentUserId) {
-//     return res.status(400).json({ message: 'You cannot follow yourself' });
-//   }
-
-//   try {
-//     const targetUser = await User.findById(targetUserId);
-//     const currentUser = await User.findById(currentUserId);
-
-//     if (!targetUser || !currentUser) {
-//       return res.status(404).json({ message: 'User not found' });
-//     }
-
-//     const isFollowing = currentUser.following.includes(targetUserId);
-
-//     if (isFollowing) {
-//       // Unfollow
-//       currentUser.following.pull(targetUserId);
-//       targetUser.followers.pull(currentUserId);
-//     } else {
-//       // Follow
-//       currentUser.following.push(targetUserId);
-//       targetUser.followers.push(currentUserId);
-//     }
-
-//     await currentUser.save();
-//     await targetUser.save();
-
-//     res.status(200).json({ message: isFollowing ? 'Unfollowed' : 'Followed', followers: targetUser.followers.length });
-//   } catch (err) {
-//     res.status(500).json({ message: 'Failed to follow/unfollow', error: err.message });
-//   }
-// };
 
 
 // In userController.js
@@ -400,20 +284,20 @@ export const getLikedContentByUserId = async (req, res) => {
 };
 
 
-// export const getCurrentUserprofile = async (req, res) => {
-//   try {
-//     const user = req.user; // populated by protect middleware
-//     if (!user) {
-//       return res.status(401).json({ message: 'Unauthorized' });
-//     }
-//     res.json({
-//       _id: user._id,
-//       username: user.username,
-//       email: user.email,
-//       isBanned: user.isBanned,
-//       // add more fields as needed
-//     });
-//   } catch (err) {
-//     res.status(500).json({ message: 'Server error' });
-//   }
-// };
+export const getCurrentUserprofile = async (req, res) => {
+  try {
+    const user = req.user; // populated by protect middleware
+    if (!user) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+    res.json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      isBanned: user.isBanned,
+      // add more fields as needed
+    });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};

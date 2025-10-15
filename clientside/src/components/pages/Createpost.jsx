@@ -85,6 +85,11 @@ const CreatePost = () => {
       typeText();
     } catch (error) {
       console.error('AI suggestion error:', error);
+      if (error.response?.status === 503) {
+        alert('AI features are currently unavailable. Please contact the administrator to enable AI-powered features.');
+      } else {
+        alert('Failed to generate description. Please try again later.');
+      }
     } finally {
       setLoading(false);
     }
@@ -104,6 +109,11 @@ const CreatePost = () => {
       }));
     } catch (error) {
       console.error("AI tag suggestion error:", error);
+      if (error.response?.status === 503) {
+        alert('AI features are currently unavailable. Please contact the administrator to enable AI-powered features.');
+      } else {
+        alert('Failed to generate tags. Please try again later.');
+      }
     } finally {
       setTagLoading(false); // Stop loading
     }
@@ -171,7 +181,7 @@ const CreatePost = () => {
 
           <button onClick={handleAITags} disabled={tagLoading} className="ai-btn">
             {tagLoading ? 'Generating Tags...' : 'Suggest Tags'}
-          </button>
+          </button>   
 
           <div className="form-group file-upload-group">
             <label htmlFor="image-upload" className="file-upload-label">

@@ -1,0 +1,55 @@
+.banned-user-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.banned-user-modal {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+}
+
+.banned-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.banned-user-modal h1 {
+  color: #d32f2f;
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.banned-user-modal p {
+  color: #666;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.logout-btn {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #b71c1c;
+}
